@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="bg">
+<head>
+    <link rel="icon" type="image/png" href="Your paragraph text (1).png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FitnessLAB — Средно-напреднал</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #000000;
+      --secondary: #000000;
+      --accent: #ff785a;
+      --radius: 16px;
+      --transition: 0.3s ease;
+      --text-main: #1c2e1f;
+      --text-muted: #4b6350;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin:0; padding:0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-main);
+      background: url('https://static.posters.cz/image/1300/96980.jpg') no-repeat center top / cover fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+
+  background: rgba(15, 20, 35, 0.20);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 14px;
+
+  /* Тънък, мек, лилав кант */
+  border: 1px solid rgba(170, 130, 255, 0.35);
+  box-shadow:
+      0 0 4px rgba(170, 130, 255, 0.28),
+      inset 0 0 3px rgba(170, 130, 255, 0.22);
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* При скрол — една идея по-плътен, но все още нежен */
+header.scrolled {
+  background: rgba(15, 20, 35, 0.28);
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+      0 0 7px rgba(170, 130, 255, 0.45),
+      inset 0 0 4px rgba(170, 130, 255, 0.30);
+}
+
+
+    .brand { display:flex; align-items:center; gap:12px; }
+    .logo { display:flex; align-items:center; height:90px; width:auto; }
+    .logo-img { height:100%; width:auto; object-fit:contain; transition:transform 0.5s ease; }
+    .logo:hover .logo-img { transform:scale(1.35); }
+    .sitename { font-size:22px; font-weight:600; color:#e0e5ff; text-shadow:0 2px 8px rgba(0,0,0,0.7); }
+
+    .top-actions { display:flex; align-items:center; gap:16px; }
+    .top-actions a {
+      color: #e0e5ff;
+      background: linear-gradient(145deg, #180642, #000000);
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-weight: 600; text-decoration: none;
+      transition: all var(--transition);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 6px rgba(255,255,255,0.1) inset;
+      transform-style: preserve-3d;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .top-actions a:hover {
+      background: linear-gradient(135deg, #1c0c57, #777171);
+      transform: translateY(-6px) rotateX(3deg) rotateY(-3deg) scale(1.07);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 12px rgba(255,255,255,0.2) inset;
+      color: #fff;
+    }
+
+    main {
+      max-width:1200px;
+      margin:60px auto;
+      width:90%;
+    }
+
+    h1 {
+      font-family:'Roboto Slab', serif;
+      text-align:center;
+      font-size:38px;
+      margin-bottom:30px;
+      color:#fff;
+      text-shadow:0 3px 12px black;
+    }
+
+    .section {
+      background:rgba(0,0,0,0.55);
+      padding:28px;
+      margin-bottom:26px;
+      border-radius:var(--radius);
+      backdrop-filter:blur(6px);
+      box-shadow:0 6px 22px rgba(0,0,0,0.6);
+      animation:fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(20px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    h2 { color:#ff785a; font-size:28px; margin-bottom:14px; }
+    p, li { color:#fff; line-height:1.6; }
+    ul { padding-left:22px; }
+    ul li { margin-bottom:8px; }
+
+    /* Video Section */
+    .video-wrapper {
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .video-frame {
+      box-shadow: 0 0 25px rgba(0, 200, 255, 0.6), 0 0 55px rgba(0, 200, 255, 0.35);
+      border-color: rgba(0, 200, 255, 0.7);
+
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16/9;
+      height: auto;
+      border-radius: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      object-fit: cover;
+    }
+
+    /* Tabs */
+    .tabs {
+      margin-top: 30px;
+    }
+
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-buttons button {
+      padding: 10px 18px;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      background: #ff785a;
+      color: white;
+      transition: 0.3s ease, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .tab-buttons button:hover {
+      background: #ff502e;
+      transform: scale(1.08) translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.55);
+    }
+
+    .tab-content {
+      display: none;
+      background: rgba(0,0,0,0.55);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0) scale(1.03);
+      animation: springIn 0.45s cubic-bezier(0.22, 1.4, 0.36, 1);
+    }
+
+    footer {
+      margin-top:auto;
+      text-align:center;
+      padding:20px 0;
+      color:var(--text-muted);
+    }
+  @keyframes springIn {
+      0% { transform: translateY(20px) scale(0.9); }
+      70% { transform: translateY(-6px) scale(1.05); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .section:hover {
+      transform: translateY(-6px);
+      transition: 0.35s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.65);
+    }
+
+  .video-frame:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 40px rgba(36, 9, 112, 0.9), 0 0 70px rgba(42, 11, 100, 0.7);
+      border-color: rgb(45, 17, 90);
+    }
+
+    @keyframes videoPulse {
+      0% { box-shadow: 0 0 20px rgba(57, 10, 117, 0.3); }
+      50% { box-shadow: 0 0 45px rgba(63, 13, 145, 0.8); }
+      100% { box-shadow: 0 0 20px rgba(20, 14, 95, 0.3); }
+    }
+
+    .video-frame {
+      animation: videoPulse 4s infinite ease-in-out;
+    }
+.dropdown {
+  position: relative;
+}
+.dropdown-btn {
+  background: #000000;
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.dropdown-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  background: #949090;
+}
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  flex-direction: column;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+}
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+.dropdown-content a {
+  color: #fff;
+  padding: 10px 18px;
+  text-decoration: none;
+  transition: var(--transition);
+  border-radius: 10px;
+}
+.dropdown-content a:hover {
+  background: rgba(255,255,255,0.15);
+}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <a href="index.html" class="logo">
+      <img src="Your paragraph text (1).png" alt="FitnessLab Logo" class="logo-img">
+    </a>
+    <div class="sitename">FitnessLab</div>
+
+    <!-- Базови упражнения dropdown като в индекса -->
+    <div class="dropdown" style="margin-left: 20px;">
+      <div class="dropdown-btn">Базови упражнения</div>
+      <div class="dropdown-content">
+        <a href="squat.html">Клек</a>
+        <a href="benchpress.html">Лежанка</a>
+        <a href="deadlift.html">Мъртва тяга</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Топ бутони -->
+  <div class="top-actions">
+    <a href="injuries.html">Контузии / Болежки</a>
+    <a href="bodyfat.html">Изчисли подкожни мазнини</a>
+    <a href="dailycalories.html">Дневен енергоразход</a>
+    <a href="log-in.html">Вход</a>
+  </div>
+</header>
+
+<main>
+  <h1>Средно напреднал — следващото ниво</h1>
+
+  <div class="section">
+    <h2>Когато тялото спре да расте… а ти още не</h2>
+    <p>Тялото понякога обича да играе на "замръзни" точно когато ти пламтиш за още напредък. Но застоят не е враг — той е компас. Той нашепва, че е време да вдигнеш нивото на играта.</p>
+    <p>На това ниво мускулите ти вече са "опознали" класическите схеми и не се впечатляват лесно. Затова трябва да ги изненадаш:</p>
+    <ul>
+      <li>Сменяй повторенията: 5×5, 8–12, 12–15.</li>
+      <li>Добавяй тежест постепенно.</li>
+      <li>Използвай supersets, drop sets, rest‑pause.</li>
+      <li>Играй с ъгъла и техниката.</li>
+      <li>Променяй темпото – бавни негативи, взривни позитиви.</li>
+      <li>Включвай различни тренировъчни сплитове.</li>
+    </ul>
+  </div>
+
+  <!-- VIDEO SECTION -->
+  <div class="video-wrapper">
+    <iframe class="video-frame" src="The Most 'Optimal' Exercises for EVERY Muscle (Ft. TNF).mp4" title="Video placeholder"></iframe>
+  </div>
+
+  <div class="section">
+    <h2>Контузии? По‑скоро предупреждения</h2>
+    <p>Контузиите рядко идват изненадващо — по-често са като мъдър стар приятел, който казва: "Брей, по-кротко, войниче". На това ниво натоварването е по-високо и сигналите на тялото стават по-важни.</p>
+    <p>Научи се да различаваш "добрата" мускулна умора от реалното напрежение, което вещае проблем.</p>
+    <ul>
+      <li>Не игнорирай болките — те не са героизъм.</li>
+      <li>Намали тежестта, но запази техниката като храм.</li>
+      <li>При нужда избери по‑щадящи движения.</li>
+      <li>Прави редовни разтягания и мобилност.</li>
+      <li>И ако усетиш, че нещо не е наред — <a href="injuries.html" style="color:#ff785a; font-weight:700; text-decoration:underline;">посети страницата за контузии</a>.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Методи, които отключват следващия прогрес</h2>
+    <ul>
+      <li><strong>Periodization</strong> — циклиране на обем и интензивност.</li>
+      <li><strong>Supersets</strong> — жестоко ефективни комбинации.</li>
+      <li><strong>Tempo control</strong> — бавни негативи 3–5 секунди.</li>
+      <li><strong>Volume cycling</strong> — смяна на общите серии.</li>
+      <li><strong>Strength blocks</strong> — кратки периоди за сила.</li>
+      <li><strong>Wave loading</strong> — вълново покачване на тежестите.</li>
+      <li><strong>Pre-exhaust</strong> — уморяваш малкия мускул преди големия.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Примерни тренировки за средно напреднали</h2>
+
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button data-tab="tab1">Програма 1 — Гърди & Трицепс</button>
+        <button data-tab="tab2">Програма 2 — Гръб & Бицепс</button>
+        <button data-tab="tab3">Програма 3 — Крака</button>
+        <button data-tab="tab4">Програма 4 — Рамо</button>
+      </div>
+
+      <div id="tab1" class="tab-content">
+        <h3>Гърди & Трицепс</h3>
+        <ul>
+          <li>Повдигане от лег — 4×6‑10</li>
+          <li>Кошмарни дъмбели (наклон) — 4×8‑12</li>
+          <li>Кросоувър — 3×12‑15</li>
+          <li>Кофички — 3×макс</li>
+          <li>Френско разгъване — 3×10‑12</li>
+        </ul>
+      </div>
+
+      <div id="tab2" class="tab-content">
+        <h3>Гръб & Бицепс</h3>
+        <ul>
+          <li>Набирания — 4×макс</li>
+          <li>Гребане с щанга — 4×8‑10</li>
+          <li>Гребане на машина — 3×10‑12</li>
+          <li>Бицепсово сгъване — 3×10‑12</li>
+        </ul>
+      </div>
+
+      <div id="tab3" class="tab-content">
+        <h3>Крака</h3>
+        <ul>
+          <li>Клек — 4×6‑10</li>
+          <li>Напади — 3×10‑12 на крак</li>
+          <li>Лег преса — 4×10‑15</li>
+          <li>Бедрено разгъване — 3×12‑15</li>
+          <li>Повдигане за прасец — 4×15‑20</li>
+        </ul>
+      </div>
+
+      <div id="tab4" class="tab-content">
+        <h3>Рамо</h3>
+        <ul>
+          <li>Военна преса — 4×6‑10</li>
+          <li>Разтваряне встрани — 3×12‑15</li>
+          <li>Разтваряне напред — 3×10‑12</li>
+          <li>Обратен пек‑дек — 3×12‑15</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>© FitnessLab 2025 — Продължавай да растеш.</footer>
+
+<script>
+  const links = document.querySelectorAll('.top-actions a');
+  links.forEach(link => {
+    link.addEventListener('mousemove', e => {
+      const rect = link.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const dx = (x - cx) / cx;
+      const dy = (y - cy) / cy;
+      const tiltX = dy * 5;
+      const tiltY = dx * -5;
+      link.style.transform = `translateY(-3px) scale(1.02) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    });
+    link.addEventListener('mouseleave', () => {
+      link.style.transform = 'translateY(0px) scale(1) rotateX(0deg) rotateY(0deg)';
+    });
+  });
+
+  const tabButtons = document.querySelectorAll('.tab-buttons button');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.tab);
+
+      tabContents.forEach(c => {
+        c.classList.remove('active');
+      });
+
+      // bounce animation on tab button
+      btn.style.transform = 'scale(1.15)';
+      setTimeout(() => {
+        btn.style.transform = 'scale(1)';
+      }, 200);
+
+      setTimeout(() => {
+        target.classList.add('active');
+      }, 10);
+    });
+  });(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.tab);
+      tabContents.forEach(c => {
+        c.classList.remove('active');
+      });
+      
+      // Add slight delay to ensure display:block activates smoothly
+      setTimeout(() => {
+        target.classList.add('active');
+      }, 10);
+    });
+  });(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.tab);
+      tabContents.forEach(c => c.classList.remove('active'));
+      target.classList.add('active');
+    });
+  });
+</script>
+<script>
+  document.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+    if (window.scrollY > 40) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+</script>
+
+</body>
+</html>

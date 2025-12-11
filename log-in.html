@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="bg">
+<head>
+    <link rel="icon" type="image/png" href="Your paragraph text (1).png">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FitnessLab — Вход</title>
+  <style>
+    :root {
+      --btn-bg: #4a6fa5;
+      --btn-hover: #3f5f99;
+      --text-main: #1c2e1f;
+      --text-muted: #4b6350;
+      --radius: 16px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('https://static.posters.cz/image/1300/96980.jpg') center 35% no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    .container {
+      background: rgba(255,255,255,0.95);
+      padding: 50px 40px;
+      border-radius: var(--radius);
+      width: 380px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      animation: fadeIn 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .field { display: flex; flex-direction: column; margin-bottom: 14px; }
+    .field label { margin-bottom: 6px; color: var(--text-muted); font-weight: 500; }
+
+    .field input {
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(0,0,0,0.2);
+      background: #f9f9f9;
+      color: var(--text-main);
+      font-size: 15px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: var(--btn-bg);
+      background: #ffffff;
+      box-shadow: 0 0 8px rgba(74,111,165,0.3);
+    }
+
+    .btn {
+      padding: 14px;
+      border: none;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--btn-bg), #1e2c57);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, var(--btn-hover), #162245);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    .link {
+      text-align: center;
+      color: #27395e;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 8px;
+      transition: color 0.3s ease;
+    }
+
+    .link:hover { color: #1e2c57; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Вход</h2>
+    <form id="login-form">
+      <div class="field">
+        <label>Имейл</label>
+        <input type="email" id="login-email" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label>Парола</label>
+        <input type="password" id="login-password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn">Вход</button>
+    </form>
+    <a href="sign-up.html" class="link">Нямате акаунт? Регистрация</a>
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+
+      // Проверка дали има запаметено име
+      const savedName = localStorage.getItem('userName') || 'Потребителю';
+
+      alert(`Успешен вход! Добре дошъл, ${savedName}!`);
+      localStorage.setItem('isLoggedIn', 'true');
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

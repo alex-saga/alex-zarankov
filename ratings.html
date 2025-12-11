@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="bg">
+<head> 
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FitnessLAB — Ревюта</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #000000;
+      --secondary: #000000;
+      --accent: #ff785a;
+      --radius: 16px;
+      --transition: 0.3s ease;
+      --text-main: #1c2e1f;
+      --text-muted: #4b6350;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family: 'Poppins', sans-serif; color: var(--text-main); 
+           background: url('https://static.posters.cz/image/1300/96980.jpg') no-repeat center top / cover fixed; 
+           min-height: 100vh; display: flex; flex-direction: column; }
+
+    header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+
+  background: rgba(15, 20, 35, 0.20);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 14px;
+
+  /* Тънък, мек, лилав кант */
+  border: 1px solid rgba(170, 130, 255, 0.35);
+  box-shadow:
+      0 0 4px rgba(170, 130, 255, 0.28),
+      inset 0 0 3px rgba(170, 130, 255, 0.22);
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* При скрол — една идея по-плътен, но все още нежен */
+header.scrolled {
+  background: rgba(15, 20, 35, 0.28);
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+      0 0 7px rgba(170, 130, 255, 0.45),
+      inset 0 0 4px rgba(170, 130, 255, 0.30);
+}
+
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo { display: flex; align-items: center; height: 90px; width: auto; }
+    .logo-img { height: 100%; width: auto; object-fit: contain; transition: transform 0.5s ease; }
+    .logo:hover .logo-img { transform: scale(1.35); }
+    .sitename { font-size: 22px; font-weight: 600; color: #e0e5ff; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+    .top-actions { display: flex; align-items: center; gap: 16px; }
+    .top-actions a {
+      color: #e0e5ff;
+      background: linear-gradient(145deg, #180642, #000000);
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-weight: 600; text-decoration: none;
+      transition: all var(--transition);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 6px rgba(255,255,255,0.1) inset;
+      transform-style: preserve-3d;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .top-actions a:hover {
+      background: linear-gradient(135deg, #1c0c57, #777171);
+      transform: translateY(-6px) rotateX(3deg) rotateY(-3deg) scale(1.07);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 12px rgba(255,255,255,0.2) inset;
+      color: #fff;
+    }
+
+    .dropdown { position: relative; }
+    .dropdown-btn { background: #000; padding: 12px 20px; border-radius: 14px; font-weight: 700; cursor: pointer; color: #fff; transition: var(--transition); border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.4); }
+    .dropdown-btn:hover { transform: translateY(-4px) scale(1.05); background: #949090; }
+    .dropdown-content { position: absolute; top: 100%; left: 0; display: none; flex-direction: column; background: rgba(0,0,0,0.8); backdrop-filter: blur(6px); border-radius: 12px; padding: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.45); }
+    .dropdown:hover .dropdown-content { display: flex; }
+    .dropdown-content a { color: #fff; padding: 10px 18px; text-decoration: none; transition: var(--transition); border-radius: 10px; }
+    .dropdown-content a:hover { background: rgba(255,255,255,0.15); }
+
+    main { max-width: 1000px; margin: 60px auto 20px; text-align: center; }
+    .review-card { background: rgba(255,255,255,0.15); border-radius: 16px; padding: 20px; margin: 10px; display: inline-block; width: 280px; transition: transform 0.3s ease; vertical-align: top; }
+    .review-card:hover { transform: scale(1.05); }
+    .review-author { font-weight: bold; margin-bottom: 8px; }
+    .stars { font-size: 24px; margin-bottom: 8px; cursor: pointer; }
+    .stars span { color: #444; transition: color 0.2s; }
+    .stars span.selected { color: gold; }
+    .add-review { margin-top: 40px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 16px; }
+    input, textarea { width: 90%; padding: 8px; margin: 8px 0; border-radius: 8px; border: none; font-size: 14px; }
+    button { padding: 10px 20px; margin-top: 10px; cursor: pointer; border-radius: 12px; border: none; background: gold; color: #111; font-weight: bold; }
+    footer { margin-top: auto; color: var(--text-muted); font-size: 14px; padding: 20px 0; text-align: center; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <a href="index.html" class="logo"><img src="Your paragraph text (1).png" alt="FitnessLab Logo" class="logo-img"></a>
+    <div class="sitename">FitnessLab</div>
+    <div class="dropdown" style="margin-left: 20px;">
+      <div class="dropdown-btn">Базови упражнения</div>
+      <div class="dropdown-content">
+        <a href="squat.html">Клек</a>
+        <a href="benchpress.html">Лежанка</a>
+        <a href="deadlift.html">Мъртва тяга</a>
+      </div>
+    </div>
+  </div>
+  <div class="top-actions">
+    <a href="injuries.html">Контузии / Болежки</a>
+    <a href="bodyfat.html">Изчисли подкожни мазнини</a>
+    <a href="dailycalories.html">Дневен енергоразход</a>
+    <a href="log-in.html">Вход</a>
+  </div>
+</header>
+
+<main>
+  <h1>Отзиви от нашите потребители</h1>
+  <div id="reviews-container"></div>
+
+  <div class="add-review">
+    <h2>Добави ревю</h2>
+    <input type="text" id="author" placeholder="Вашето име"><br>
+    <textarea id="message" rows="3" placeholder="Вашето мнение..."></textarea><br>
+    <div class="stars" id="star-picker">
+      <span data-value="1">★</span>
+      <span data-value="2">★</span>
+      <span data-value="3" class="selected">★</span>
+      <span data-value="4">★</span>
+      <span data-value="5">★</span>
+    </div>
+    <button onclick="addReview()">Публикувай</button>
+  </div>
+</main>
+
+<footer>© FitnessLab 2025 — Благодарим за доверието!</footer>
+
+<script>
+let selectedStars = 3;
+const starPicker = document.getElementById('star-picker');
+starPicker.addEventListener('click', e => {
+  if(e.target.tagName === 'SPAN') {
+    selectedStars = parseInt(e.target.dataset.value);
+    updateStarDisplay();
+  }
+});
+function updateStarDisplay() {
+  Array.from(starPicker.children).forEach(span => {
+    span.classList.toggle('selected', parseInt(span.dataset.value) <= selectedStars);
+  });
+}
+
+const presetReviews = [
+  { author: "Иван", message: "Сайтът е супер – научих се да клякам без болки!", stars: 5 },
+  { author: "Мария", message: "Дизайнът е уникален! Много ми помага при тренировките.", stars: 4 },
+  { author: "Георги", message: "Страхотно ръководство за начинаещи!", stars: 4 },
+  { author: "Никол", message: "Най-добрият фитнес сайт, който съм виждала.", stars: 5 },
+  { author: "Алекс", message: "Лесно, бързо и удобно!", stars: 4 },
+  { author: "Тони", message: "Резултати само след 1 месец!", stars: 5 },
+  { author: "Силвия", message: "Много полезни съвети за травми.", stars: 4 },
+  { author: "Павел", message: "Тренировките са поднесени ясно и приятно.", stars: 4 },
+  { author: "Дани", message: "Страхотни програми за мазнини!", stars: 5 },
+  { author: "Вики", message: "Чувствам се мотивирана всеки ден.", stars: 5 }
+];
+
+function renderReviews() {
+  const container = document.getElementById('reviews-container');
+  container.innerHTML = '';
+  const extra = JSON.parse(localStorage.getItem('extraReviews') || '[]');
+  const allReviews = [...presetReviews, ...extra];
+  allReviews.forEach(r => {
+    let starsHtml = '';
+    for(let i=1;i<=5;i++){
+      starsHtml += `<span style="color:${i<=r.stars?'gold':'#444'}">★</span>`;
+    }
+    const div = document.createElement('div');
+    div.className = 'review-card';
+    div.innerHTML = `<div class='review-author'>${r.author}</div>
+                     <div class='stars'>${starsHtml}</div>
+                     <div>${r.message}</div>`;
+    container.appendChild(div);
+  });
+}
+
+function addReview() {
+  const author = document.getElementById('author').value;
+  const message = document.getElementById('message').value;
+  if(!author || !message) return alert('Попълнете всички полета!');
+  const newReview = { author, message, stars: selectedStars };
+  const saved = JSON.parse(localStorage.getItem('extraReviews') || '[]');
+  saved.push(newReview);
+  localStorage.setItem('extraReviews', JSON.stringify(saved));
+  document.getElementById('author').value = '';
+  document.getElementById('message').value = '';
+  selectedStars = 3;
+  updateStarDisplay();
+  renderReviews();
+}
+
+renderReviews();
+</script>
+<script>
+  document.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+    if (window.scrollY > 40) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+</script>
+
+</body>
+</html>

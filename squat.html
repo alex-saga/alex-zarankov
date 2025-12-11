@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitLens — Клек</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6bdc8e;
+      --secondary: #8ee6b6;
+      --radius: 16px;
+      --transition: 0.3s ease;
+      --text-main: #f0f0f0;
+      --text-muted: #b0b0b0;
+      font-family: 'Poppins', sans-serif;
+    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-main);
+      background: url('https://static.posters.cz/image/1300/96980.jpg') no-repeat center top / cover fixed;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+
+  background: rgba(15, 20, 35, 0.20);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 14px;
+
+  /* Тънък, мек, лилав кант */
+  border: 1px solid rgba(170, 130, 255, 0.35);
+  box-shadow:
+      0 0 4px rgba(170, 130, 255, 0.28),
+      inset 0 0 3px rgba(170, 130, 255, 0.22);
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* При скрол — една идея по-плътен, но все още нежен */
+header.scrolled {
+  background: rgba(15, 20, 35, 0.28);
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+      0 0 7px rgba(170, 130, 255, 0.45),
+      inset 0 0 4px rgba(170, 130, 255, 0.30);
+}
+
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo { display: flex; align-items: center; height: 90px; width: auto; }
+    .logo-img { height: 100%; width: auto; object-fit: contain; transition: transform 0.5s ease; }
+    .logo:hover .logo-img { transform: scale(1.35); }
+    .sitename { font-size: 22px; font-weight: 600; color: #e0e5ff; text-shadow: 0 2px 8px rgba(0,0,0,0.7); }
+    .top-actions {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .top-actions a {
+      color: #e0e5ff;
+      background: linear-gradient(145deg, #180642, #000000);
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-weight: 600; text-decoration: none;
+      transition: all var(--transition);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 6px rgba(255,255,255,0.1) inset;
+      transform-style: preserve-3d;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .top-actions a:hover {
+      background: linear-gradient(135deg, #1c0c57, #777171);
+      transform: translateY(-6px) rotateX(3deg) rotateY(-3deg) scale(1.07);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 12px rgba(255,255,255,0.2) inset;
+      color: #fff;
+    }
+    main {
+      max-width: 900px;
+      margin: 60px auto;
+      background: linear-gradient(145deg, rgba(30,30,40,0.95), rgba(50,50,60,0.95));
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+    h1 { font-size: 28px; margin-bottom: 20px; text-align:center; }
+    p { line-height: 1.6; margin-bottom: 16px; }
+    iframe {
+      width: 100%;
+      height: 400px;
+      border-radius: 12px;
+      border: none;
+      margin-top: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    }
+    footer {
+      margin-top: auto;
+      color: var(--text-muted);
+      font-size: 14px;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .dropdown {
+  position: relative;
+}
+.dropdown-btn {
+  background: #000000;
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.dropdown-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  background: #949090;
+}
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  flex-direction: column;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+}
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+.dropdown-content a {
+  color: #fff;
+  padding: 10px 18px;
+  text-decoration: none;
+  transition: var(--transition);
+  border-radius: 10px;
+}
+.dropdown-content a:hover {
+  background: rgba(255,255,255,0.15);
+}
+  </style>
+</head>
+<body>
+  <header>
+  <div class="brand">
+    <a href="index.html" class="logo">
+      <img src="Your paragraph text (1).png" alt="FitnessLab Logo" class="logo-img">
+    </a>
+    <div class="sitename">FitnessLab</div>
+
+    <!-- Базови упражнения dropdown като в индекса -->
+    <div class="dropdown" style="margin-left: 20px;">
+      <div class="dropdown-btn">Базови упражнения</div>
+      <div class="dropdown-content">
+        <a href="squat.html">Клек</a>
+        <a href="benchpress.html">Лежанка</a>
+        <a href="deadlift.html">Мъртва тяга</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Топ бутони -->
+  <div class="top-actions">
+    <a href="injuries.html">Контузии / Болежки</a>
+    <a href="bodyfat.html">Изчисли подкожни мазнини</a>
+    <a href="dailycalories.html">Дневен енергоразход</a>
+    <a href="log-in.html">Вход</a>
+  </div>
+</header>
+
+  <main>
+    <h1>Клек — короната на силата</h1>
+    <p>Слизаш надолу като владетел, който поздравява народа си, после се издигаш обратно —
+    не с магия, а с чиста мощ на крака и дух. Гърбът стабилен, гърдите напред — 
+    сякаш искаш да впечатлиш самата гравитация.</p>
+    <p>Коляното следва посоката на пръстите — дипломатично, без конфликти.
+    Тежестта стои върху петите — подът трябва да усети, че си жив и победоносен.
+    Не бързай като нетърпелив турист на ескалатор — контролът е твоят най-добър приятел.</p>
+    <p>На дъното — пауза на величието! После се надигаш, все едно земята те отблъсква,
+    отказвайки да стои над теб.</p>
+
+    <h2 style="margin-top:30px; text-align:center;">Видео демонстрация</h2>
+    <iframe src="https://www.youtube.com/embed/ultWZbUMPL8" allowfullscreen></iframe>
+  </main>
+  <footer>© FitnessLab 2025 — Клекни като шампион. Изправи се като легенда.</footer>
+  <script>
+  document.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+    if (window.scrollY > 40) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+</script>
+
+</body>
+</html>

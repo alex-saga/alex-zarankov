@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="bg">
+<head> 
+   <link rel="icon" type="image/png" href="Your paragraph text (1).png">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FitnessLab — Контузии и болежки</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #000000;
+  --secondary: #000000;
+  --accent: #ff785a;
+  --radius: 16px;
+  --transition: 0.3s ease;
+  --text-main: #1c2e1f;
+  --text-muted: #4b6350;
+  font-family: 'Poppins', sans-serif;
+}
+
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-main);
+  background: url('https://static.posters.cz/image/1300/96980.jpg') no-repeat center top / cover fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+
+  background: rgba(15, 20, 35, 0.20);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 14px;
+
+  /* Тънък, мек, лилав кант */
+  border: 1px solid rgba(170, 130, 255, 0.35);
+  box-shadow:
+      0 0 4px rgba(170, 130, 255, 0.28),
+      inset 0 0 3px rgba(170, 130, 255, 0.22);
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* При скрол — една идея по-плътен, но все още нежен */
+header.scrolled {
+  background: rgba(15, 20, 35, 0.28);
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+      0 0 7px rgba(170, 130, 255, 0.45),
+      inset 0 0 4px rgba(170, 130, 255, 0.30);
+}
+
+
+.brand { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+.logo { 
+  display: flex; 
+  align-items: center; 
+  height: 90px; 
+  width: auto; 
+}
+.logo-img { 
+  height: 100%;       /* Височината е фиксирана спрямо контейнера */
+  width: auto;         /* Ширината се мащабира пропорционално */
+  object-fit: contain; /* Запазва съотношението на изображението */
+  transition: transform 0.5s ease; 
+}
+.logo:hover .logo-img { 
+  transform: scale(1.35); /* Плавен zoom при hover */
+}
+.sitename { 
+  font-size: 22px; 
+  font-weight: 600; 
+  color: #e0e5ff; 
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7); 
+}
+
+
+.top-actions { display: flex; align-items: center; gap: 16px; }
+
+.top-actions a {
+      color: #e0e5ff;
+      background: linear-gradient(145deg, #180642, #000000);
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-weight: 600; text-decoration: none;
+      transition: all var(--transition);
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5), 0 0 6px rgba(255,255,255,0.1) inset;
+      transform-style: preserve-3d;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .top-actions a:hover {
+      background: linear-gradient(135deg, #1c0c57, #777171);
+      transform: translateY(-6px) rotateX(3deg) rotateY(-3deg) scale(1.07);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6), 0 0 12px rgba(255,255,255,0.2) inset;
+      color: #fff;
+    }
+
+main {
+  max-width: 1000px;
+  margin: 60px auto;
+  background: rgba(255,255,255,0.9);
+  border-radius: var(--radius);
+  padding: 40px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+h1, h2 { font-family: 'Roboto Slab', serif; color: var(--primary); margin-bottom: 16px; }
+h1 { text-align: center; font-size: 32px; margin-bottom: 32px; text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+
+p { font-size: 17px; line-height: 1.6; color: var(--text-main); margin-bottom: 20px; }
+
+.video-section { display: flex; flex-direction: column; align-items: center; gap: 40px; margin-top: 40px; }
+.video-container { width: 100%; text-align: center; }
+.video-container h3 { margin-bottom: 12px; color: #1c2e1f; }
+video { width: 100%; max-width: 720px; height: auto; border-radius: var(--radius); box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: block; margin: 0 auto; }
+
+footer { margin-top: auto; color: var(--text-muted); font-size: 14px; padding: 20px 0; text-align: center; }
+.dropdown {
+  position: relative;
+}
+.dropdown-btn {
+  background: #000000;
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  transition: var(--transition);
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.dropdown-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  background: #949090;
+}
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  flex-direction: column;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.45);
+}
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+.dropdown-content a {
+  color: #fff;
+  padding: 10px 18px;
+  text-decoration: none;
+  transition: var(--transition);
+  border-radius: 10px;
+}
+.dropdown-content a:hover {
+  background: rgba(255,255,255,0.15);
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="brand">
+    <a href="index.html" class="logo">
+      <img src="Your paragraph text (1).png" alt="FitnessLab Logo" class="logo-img">
+    </a>
+    <div class="sitename">FitnessLab</div>
+
+    <!-- Базови упражнения dropdown като в индекса -->
+    <div class="dropdown" style="margin-left: 20px;">
+      <div class="dropdown-btn">Базови упражнения</div>
+      <div class="dropdown-content">
+        <a href="squat.html">Клек</a>
+        <a href="benchpress.html">Лежанка</a>
+        <a href="deadlift.html">Мъртва тяга</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Топ бутони -->
+  <div class="top-actions">
+    <a href="bodyfat.html">Изчисли подкожни мазнини</a>
+    <a href="dailycalories.html">Дневен енергоразход</a>
+    <a href="log-in.html">Вход</a>
+  </div>
+</header>
+
+<main>
+  <h1>Контузии и болежки — тренирай умно, не само силно</h1>
+
+  <p>Всеки, който е стъпвал във фитнеса, знае, че границата между напредък и претоварване е тънка като жилото на бицепс след последното повторение. Истината е проста — тялото не е машина. То има нужда от грижа, почивка и разбиране.</p>
+
+  <h2>Как да избегнем контузии?</h2>
+  <p>🔹 <b>Загрявай винаги.</b> Не подценявай загряването — 5–10 минути са достатъчни, за да подготвиш ставите, сухожилията и мускулите.<br>
+  🔹 <b>Техниката е всичко.</b> Повдигни по-малко, но правилно. Лошата форма е по-опасна от самата тежест.<br>
+  🔹 <b>Не тренирай до пълна болка.</b> Болката е сигнал, не награда. Различавай между „умора“ и „травма“.<br>
+  🔹 <b>Спи достатъчно.</b> Сънят е мястото, където мускулите растат и се възстановяват.</p>
+
+  <h2>Какво да правим, ако нещо боли?</h2>
+  <p>🔸 Ако болката е остра и внезапна — <b>спри веднага</b>.<br>
+  🔸 При лека болка или скованост, направи <b>лека тренировка с ниска интензивност</b> и виж дали се подобрява.<br>
+  🔸 Използвай лед (15–20 мин) през първите 48 часа, след това — топлина и разтягане.<br>
+  🔸 Ако болката продължава повече от 5 дни — <b>потърси физиотерапевт</b>. Не гадай, а се консултирай.</p>
+
+  <h2>Най-честите фитнес контузии</h2>
+  <p>💥 Болки в рамото — често от неправилен bench press или прекомерни повдигания.<br>
+  💥 Болки в кръста — от лоша техника при мъртва тяга или клек.<br>
+  💥 Претоварени колене — от прекомерни обеми или неправилна позиция на стъпалата.<br>
+  💥 Болки в лактите и китките — особено при прекаляване с push упражнения.</p>
+
+  <div class="video-section">
+    <h2>Полезни видеа за болки и възстановяване</h2>
+    <div class="video-container">
+      <h3>Болки в раменете</h3>
+      <video controls muted>
+        <source src="The REAL Reason Your Shoulders Hurt (Fix It FAST).mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-container">
+      <h3>Болки в коленете</h3>
+      <video controls muted>
+        <source src="How to Fix Knee Pain [Is It Patellar Tendonitis_].mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-container">
+      <h3>Болки в гърба</h3>
+      <video controls muted>
+        <source src="How To Fix Back Pain (3 MINUTES!).mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-container">
+      <h3>Болки в лактите</h3>
+      <video controls muted>
+        <source src="The TRUTH About Elbow Pain (And How to Solve It!).mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-container">
+      <h3>Как да загреем правилно</h3>
+      <video controls muted>
+        <source src="3-Minute Shoulder Warm-Up Routine for Stronger Lifts (Do This Before Every Workout).mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <h2 style="margin-top:50px;">Слушай тялото си</h2>
+  <p>Мъдростта на трениращия не е в това колко килограма повдига, а в това <b>дали ще може да го прави след 10 години</b>. Не бързай — прогресът е маратон, не спринт. И запомни — всеки ден без болка е победа.</p>
+</main>
+
+<footer>© FitnessLab 2025 — Възстанови се, учи се, върви напред.</footer>
+
+<script>
+// 3D ефект за бутоните в хедъра
+document.querySelectorAll('.top-actions a').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const dx = (x - cx) / cx;
+    const dy = (y - cy) / cy;
+    btn.style.transform = `translateY(-6px) rotateX(${dy*5}deg) rotateY(${-dx*5}deg) scale(1.07)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = 'translateY(0) rotateX(0) rotateY(0) scale(1)';
+  });
+});
+
+// Проверка за логнат потребител
+const userName = localStorage.getItem('userName');
+const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+if (isLoggedIn && userName) {
+  const header = document.querySelector('header .top-actions');
+  const greeting = document.createElement('div');
+  greeting.textContent = `Здравей, ${userName}!`;
+  greeting.style.color = '#e0e5ff';
+  greeting.style.fontWeight = '600';
+  greeting.style.marginRight = '10px';
+  header.prepend(greeting);
+
+  const loginLink = document.querySelector('.top-actions a[href="log-in.html"]');
+  if (loginLink) {
+    loginLink.textContent = 'Изход';
+    loginLink.onclick = () => {
+      localStorage.removeItem('isLoggedIn');
+      alert('Излезе успешно!');
+      window.location.reload();
+    };
+  }
+}
+</script>
+<script>
+  document.addEventListener("scroll", () => {
+    const header = document.querySelector("header");
+    if (window.scrollY > 40) {
+      header.classList.add("scrolled");
+    } else {
+      header.classList.remove("scrolled");
+    }
+  });
+</script>
+
+</body>
+</html>
