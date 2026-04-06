@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="bg">
 <head>
-    <link rel="icon" type="image/png" href="Your paragraph text (1).png">
+    <link rel="icon" type="image/png" href="C:\Users\alexz\Desktop\Дипломна работа - Алекс\Your paragraph text (1).png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FitnessLab — Вход</title>
@@ -119,17 +119,39 @@
     <a href="sign-up.html" class="link">Нямате акаунт? Регистрация</a>
   </div>
 
+  <script src="auth-db.js"></script>
   <script>
-    document.getElementById('login-form').addEventListener('submit', e => {
+    document.getElementById('login-form').addEventListener('submit', async e => {
       e.preventDefault();
+
       const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
 
-      // Проверка дали има запаметено име
-      const savedName = localStorage.getItem('userName') || 'Потребителю';
+      try {
+        const result = await validateUser(email, password);
 
-      alert(`Успешен вход! Добре дошъл, ${savedName}!`);
-      localStorage.setItem('isLoggedIn', 'true');
-      window.location.href = 'index.html';
+        if (!result.ok) {
+          if (result.reason === 'no_user') {
+            alert('Няма регистриран потребител с този имейл.');
+            return;
+          }
+          if (result.reason === 'wrong_password') {
+            alert('Грешна парола.');
+            return;
+          }
+          alert('Неуспешен вход.');
+          return;
+        }
+
+        localStorage.setItem('userName', result.user.name);
+        localStorage.setItem('isLoggedIn', 'true');
+
+        alert(`Успешен вход! Добре дошъл, ${result.user.name}!`);
+        window.location.href = 'index.html';
+      } catch (error) {
+        console.error(error);
+        alert('Възникна грешка при вход. Опитай отново.');
+      }
     });
   </script>
 </body>
