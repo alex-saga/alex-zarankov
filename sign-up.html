@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="bg">
 <head>
-    <link rel="icon" type="image/png" href="Your paragraph text (1).png">
+    <link rel="icon" type="image/png" href="C:\Users\alexz\Desktop\Дипломна работа - Алекс\Your paragraph text (1).png">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FitnessLab — Регистрация</title>
@@ -127,15 +127,32 @@
     <a href="log-in.html" class="link">Вече имате акаунт? Вход</a>
   </div>
 
+  <script src="auth-db.js"></script>
   <script>
-    document.getElementById('signup-form').addEventListener('submit', e => {
+    document.getElementById('signup-form').addEventListener('submit', async e => {
       e.preventDefault();
-      const name = document.getElementById('signup-name').value;
-      localStorage.setItem('userName', name);
-      localStorage.setItem('isLoggedIn', 'true');
 
-      alert(`Регистрацията е успешна! Здравей, ${name}!`);
-      window.location.href = 'index.html';
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-pass').value;
+      const confirmPassword = document.getElementById('signup-confirm').value;
+
+      if (password !== confirmPassword) {
+        alert('Паролите не съвпадат.');
+        return;
+      }
+
+      try {
+        await createUser({ name, email, password });
+        localStorage.setItem('userName', name);
+        localStorage.setItem('isLoggedIn', 'true');
+
+        alert(`Регистрацията е успешна! Здравей, ${name}!`);
+        window.location.href = 'index.html';
+      } catch (error) {
+        console.error(error);
+        alert(error.message || 'Възникна грешка при регистрация.');
+      }
     });
   </script>
 </body>
