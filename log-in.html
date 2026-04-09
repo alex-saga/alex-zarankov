@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FitnessLab — Вход</title>
+  <link rel="icon" type="image/png" href="Your paragraph text (1).png">
+  <style>
+    :root {
+      --bg: #050914;
+      --surface: rgba(12, 18, 34, 0.78);
+      --surface-border: rgba(255, 255, 255, 0.18);
+      --text-main: #eef2ff;
+      --text-muted: #bbc7f5;
+      --input-bg: rgba(255, 255, 255, 0.08);
+      --input-border: rgba(255, 255, 255, 0.22);
+      --input-focus: #8ca8ff;
+      --accent-a: #ffd65a;
+      --accent-b: #ffbc2c;
+      --button-text: #111;
+      --radius-lg: 22px;
+      --radius-md: 14px;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --transition: 0.28s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(127, 108, 255, 0.22), transparent 42%),
+        radial-gradient(circle at 85% 85%, rgba(67, 191, 255, 0.18), transparent 45%),
+        url('https://static.posters.cz/image/1300/96980.jpg') center 35% / cover fixed no-repeat;
+      color: var(--text-main);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .auth-shell {
+      width: min(100%, 460px);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--surface-border);
+      background: var(--surface);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      padding: 32px 30px 28px;
+      animation: rise 0.45s ease;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .brand h1 {
+      font-size: 23px;
+      line-height: 1.15;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #d5defd;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--input-border);
+      background: var(--input-bg);
+      color: var(--text-main);
+      font-size: 15px;
+      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+
+    .field input::placeholder { color: #95a4da; }
+
+    .field input:focus {
+      outline: none;
+      border-color: var(--input-focus);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 0 4px rgba(140, 168, 255, 0.2);
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 8px;
+      border: 0;
+      border-radius: var(--radius-md);
+      padding: 13px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      color: var(--button-text);
+      background: linear-gradient(145deg, var(--accent-a), var(--accent-b));
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+      box-shadow: 0 10px 20px rgba(255, 188, 44, 0.35);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+      box-shadow: 0 14px 26px rgba(255, 188, 44, 0.42);
+    }
+
+    .footer-links {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .link {
+      color: #dde5ff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0.9;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+
+    .link:hover {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 520px) {
+      .auth-shell { padding: 26px 20px 22px; }
+      .brand h1 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="auth-shell">
+    <div class="brand">
+      <img src="Your paragraph text (1).png" alt="FitnessLab Logo">
+      <h1>FitnessLab<br>Вход</h1>
+    </div>
+    <p class="subtitle">Влез в профила си и продължи тренировъчния си прогрес.</p>
+
+    <form id="login-form">
+      <div class="field">
+        <label for="login-email">Имейл</label>
+        <input type="email" id="login-email" placeholder="you@example.com" required>
+      </div>
+      <div class="field">
+        <label for="login-password">Парола</label>
+        <input type="password" id="login-password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn">Вход</button>
+    </form>
+
+    <div class="footer-links">
+      <a href="sign-up.html" class="link">Нямате акаунт? Регистрация</a>
+      <a href="index.html" class="link">Към началната страница</a>
+    </div>
+  </main>
+
+  <script src="auth-db.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      try {
+        const result = await validateUser(email, password);
+
+        if (!result.ok) {
+          if (result.reason === 'no_user') {
+            alert('Няма регистриран потребител с този имейл.');
+            return;
+          }
+          if (result.reason === 'wrong_password') {
+            alert('Грешна парола.');
+            return;
+          }
+          alert('Неуспешен вход.');
+          return;
+        }
+
+        localStorage.setItem('userName', result.user.name);
+        localStorage.setItem('isLoggedIn', 'true');
+
+        alert(`Успешен вход! Добре дошъл, ${result.user.name}!`);
+        const params = new URLSearchParams(window.location.search);
+        const redirectRaw = (params.get('redirect') || '').toLowerCase();
+        const blockedTargets = new Set(['ratings.html', 'log-in.html', 'sign-up.html']);
+        const nextPage = redirectRaw && !blockedTargets.has(redirectRaw) ? redirectRaw : 'index.html';
+        window.location.href = nextPage;
+      } catch (error) {
+        console.error(error);
+        alert('Възникна грешка при вход. Опитай отново.');
+      }
+    });
+  </script>
+  <script src="site-language.js"></script>
+</body>
+</html>
