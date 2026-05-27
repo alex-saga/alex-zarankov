@@ -182,7 +182,7 @@ header.scrolled {
       transform: translateY(0);
     }
 
-    .caliper-panel {
+    .image-slot {
       background: rgba(15,15,24,0.85);
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.16);
@@ -190,12 +190,20 @@ header.scrolled {
       padding: 14px;
     }
 
-    .caliper-image {
+    .image-placeholder {
       width: 100%;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.18);
       box-shadow: 0 6px 14px rgba(0,0,0,0.45);
       display: block;
+    }
+
+    .image-caption {
+      margin-top: 10px;
+      color: #f0f0f0;
+      font-weight: 600;
+      line-height: 1.5;
+      text-align: center;
     }
 
     @media (max-width: 900px) {
@@ -317,8 +325,9 @@ header.scrolled {
         <div class="result" id="result"></div>
       </div>
 
-      <aside class="caliper-panel">
-        <img class="caliper-image" src="assets/caliper.png" alt="Калипер за измерване на подкожни мазнини">
+      <aside class="image-slot">
+        <img class="image-placeholder" src="c__Users_alexz_AppData_Roaming_Cursor_User_workspaceStorage_4a5cce2d7688cdbd136ace531d06ad98_images_image-55bbaeb7-f4d6-49c8-9715-939cd6854867.png" alt="Изображение">
+        <p class="image-caption">С този уред се измерват подкожните мазнини.</p>
       </aside>
     </div>
   </main>
